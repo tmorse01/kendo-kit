@@ -1,0 +1,14 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`KButton > should render snapshot 1`] = `
+<button
+  aria-busy="false"
+  class="k-button k-button-md k-button-solid k-button-solid-primary k-rounded-md"
+>
+  <span
+    class="k-button-text"
+  >
+    Click me
+  </span>
+</button>
+`;
