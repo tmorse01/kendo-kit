@@ -70,11 +70,15 @@ describe('KButton', () => {
 
   it('should render with different variants', () => {
     const { unmount } = render(<KButton variant="primary">Primary</KButton>);
-    expect(screen.getByRole('button', { name: /primary/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: /primary/i })
+    ).toBeInTheDocument();
     unmount();
 
     render(<KButton variant="secondary">Secondary</KButton>);
-    expect(screen.getByRole('button', { name: /secondary/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: /secondary/i })
+    ).toBeInTheDocument();
     cleanup();
 
     render(<KButton variant="ghost">Ghost</KButton>);
@@ -137,4 +141,3 @@ describe('KButton', () => {
     expect(screen.getByText('Loading')).toBeInTheDocument();
   });
 });
-

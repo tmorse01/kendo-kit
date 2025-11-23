@@ -71,15 +71,22 @@ export const KButton = React.forwardRef<HTMLButtonElement, KButtonProps>(
     };
 
     // Build icon content
-    const iconContent = iconLeft || iconRight ? (
-      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
-        {iconLeft && <span>{iconLeft}</span>}
-        {children && <span>{children}</span>}
-        {iconRight && <span>{iconRight}</span>}
-      </span>
-    ) : (
-      children
-    );
+    const iconContent =
+      iconLeft || iconRight ? (
+        <span
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+          }}
+        >
+          {iconLeft && <span>{iconLeft}</span>}
+          {children && <span>{children}</span>}
+          {iconRight && <span>{iconRight}</span>}
+        </span>
+      ) : (
+        children
+      );
 
     return (
       <Button
@@ -92,7 +99,13 @@ export const KButton = React.forwardRef<HTMLButtonElement, KButtonProps>(
         {...restProps}
       >
         {isLoading ? (
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+          <span
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+            }}
+          >
             <span
               style={{
                 display: 'inline-block',
@@ -116,4 +129,3 @@ export const KButton = React.forwardRef<HTMLButtonElement, KButtonProps>(
 );
 
 KButton.displayName = 'KButton';
-
