@@ -9,6 +9,8 @@ export { KTextInput, KNumericInput, KMaskedInput } from './components/Input';
 export { KSelect, KMultiSelect } from './components/Select';
 export { KModal } from './components/Modal';
 export { KStack } from './components/Layout';
+export { KThemeProvider } from './components/Theme';
+export { useTheme } from './components/Theme';
 
 // Types
 export type {
@@ -36,4 +38,13 @@ export type {
   KStackAlign,
   KStackJustify,
 } from './components/Layout';
+export type {
+  KThemeProviderProps,
+  ThemeTokens,
+  ColorTokens,
+  TypographyTokens,
+  SpacingTokens,
+  BorderRadiusTokens,
+  ThemeContextValue,
+} from './components/Theme';
 export type { KOption } from './types';
