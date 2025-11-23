@@ -359,6 +359,274 @@ When done, document the setup in `docs/PROJECT_SETUP.md`.
 
 ---
 
+## Task 7 – Additional Component Wrappers (Agent 7)
+
+**Goal:** Expand the component library with commonly-used form and UI components.
+
+1. **Form Controls**
+
+   - `<KCheckbox />` wrapping `Checkbox` from `@progress/kendo-react-inputs`
+     - Props: `label`, `checked`, `onChange`, `disabled`, `indeterminate?`, `error?`
+     - Support controlled + uncontrolled usage
+   - `<KRadio />` wrapping `RadioButton` from `@progress/kendo-react-buttons`
+     - Props: `label`, `value`, `checked`, `onChange`, `disabled`, `name` (for groups)
+     - Support radio groups via `name` prop
+   - `<KRadioGroup />` wrapper component for managing radio groups
+     - Props: `name`, `value`, `onChange`, `options?: KOption[]`, `children?`
+
+2. **Date & Time Inputs**
+
+   - `<KDatePicker />` wrapping `DatePicker` from `@progress/kendo-react-dateinputs`
+     - Props: `label`, `hint`, `error`, `value`, `onChange`, `min?`, `max?`, `format?`, `required`, `fullWidth`
+     - Consistent with other input components (label/hint/error pattern)
+   - Add `@progress/kendo-react-dateinputs` to peerDependencies
+
+3. **Feedback Components**
+
+   - `<KToast />` or `<KNotification />` wrapper (if Kendo provides notification components)
+     - Or create a simple toast system using Kendo styling
+     - Props: `message`, `type?: "success" | "error" | "info" | "warning"`, `duration?`, `onClose?`
+   - `<KSpinner />` or `<KLoader />` wrapping `Loader` from `@progress/kendo-react-indicators`
+     - Props: `size?: "sm" | "md" | "lg"`, `themeColor?: "primary" | "secondary"`, `overlay?`
+     - Add `@progress/kendo-react-indicators` to peerDependencies if needed
+
+4. **Data Display**
+
+   - `<KBadge />` simple badge component (may need custom implementation or Kendo equivalent)
+     - Props: `variant?: "primary" | "secondary" | "success" | "warning" | "error"`, `size?`, `children`
+   - `<KCard />` simple card container component
+     - Props: `title?`, `footer?`, `children`, `elevated?`, `padding?`
+
+5. **Navigation Components**
+
+   - `<KTabs />` wrapping `TabStrip` from `@progress/kendo-react-layouts` (if available)
+     - Props: `tabs: Array<{ id: string; label: string; content: ReactNode }>`, `activeTabId`, `onTabChange`
+     - Or implement using Kendo styling patterns
+   - Add `@progress/kendo-react-layouts` to peerDependencies if used
+
+6. **Tests for each component:**
+
+   - Basic rendering
+   - Controlled/uncontrolled behavior (where applicable)
+   - Accessibility (ARIA attributes, keyboard navigation)
+   - Error states and validation
+
+7. **Storybook stories:**
+
+   - Default usage
+   - Variants/states
+   - Form integration examples
+   - Accessibility examples
+
+8. **Export all new components from `src/index.ts`**
+
+9. **Update `vite.config.ts`** to externalize any new Kendo peer dependencies
+
+**Note:** Prioritize components based on common usage patterns. If a Kendo component doesn't exist for a feature, consider whether a thin custom wrapper using Kendo styling is appropriate, or skip it.
+
+---
+
+## Task 8 – CI/CD with GitHub Actions (Agent 8)
+
+**Goal:** Set up automated CI/CD pipeline for quality assurance and automated testing.
+
+1. **Create `.github/workflows/ci.yml`**
+
+   - **Trigger:** On push to `main`/`master` and on pull requests
+   - **Jobs:**
+     - **Lint & Format Check**
+       - Run `pnpm lint`
+       - Run `pnpm format:check`
+       - Fail if code doesn't meet standards
+     - **Test**
+       - Run `pnpm test`
+       - Generate coverage reports (optional but recommended)
+       - Upload coverage to codecov or similar (optional)
+     - **Build**
+       - Run `pnpm build`
+       - Verify `dist/` outputs exist (ESM, CJS, types)
+       - Optionally cache `node_modules` and `dist` for faster runs
+     - **Type Check**
+       - Run `tsc --noEmit` to catch type errors
+     - **Storybook Build** (optional)
+       - Run `pnpm build-storybook`
+       - Verify Storybook builds successfully
+
+2. **Create `.github/workflows/release.yml`** (optional but recommended)
+
+   - **Trigger:** On tags matching `v*` (e.g., `v1.0.0`)
+   - **Jobs:**
+     - Run full CI suite (lint, test, build)
+     - **Publish to NPM** (if configured)
+       - Use `NODE_AUTH_TOKEN` secret
+       - Only publish if tag matches version pattern
+       - Use `--dry-run` first to validate
+
+3. **Add GitHub-specific files:**
+
+   - `.github/PULL_REQUEST_TEMPLATE.md` – PR template with checklist
+   - `.github/ISSUE_TEMPLATE/` – Bug report and feature request templates (optional)
+
+4. **Configure branch protection** (documentation only, not code):
+
+   - Document in `docs/CONTRIBUTING.md` that `main` branch requires:
+     - Passing CI checks
+     - At least one approval (if team workflow)
+     - Up-to-date with base branch
+
+5. **Add status badges to README.md** (will be created in Task 9):
+
+   - CI status badge
+   - Test coverage badge (if using coverage service)
+   - NPM version badge (if published)
+
+6. **Optimize workflow performance:**
+
+   - Use `pnpm` caching
+   - Cache `node_modules` between runs
+   - Run jobs in parallel where possible
+   - Use matrix strategy for multiple Node versions (optional: test on Node 18, 20, 22)
+
+7. **Add workflow status checks:**
+
+   - Ensure workflows fail fast on errors
+   - Add helpful error messages
+   - Consider adding a "check" workflow that runs on schedule (weekly) to catch dependency issues
+
+**Note:** Keep workflows simple and focused. Avoid over-engineering. The goal is automated quality checks, not complex deployment pipelines (unless specifically needed).
+
+---
+
+## Task 9 – Comprehensive Documentation (Agent 9)
+
+**Goal:** Create production-ready documentation for users and contributors.
+
+1. **README.md** (root level)
+
+   - **Header:** Project name, description, badges (CI, coverage, version)
+   - **Installation:**
+     - `pnpm add kendo-kit` or `npm install kendo-kit`
+     - List all peer dependencies with versions
+     - Note about Kendo license requirements (TELERIK_LICENSE environment variable)
+   - **Quick Start:**
+     - Basic example showing `KThemeProvider` setup
+     - Example using `KButton`, `KTextInput`, `KSelect`
+   - **Components Overview:**
+     - Table or list linking to detailed docs
+     - Brief description of each component category
+   - **Theming:**
+     - Link to `docs/THEMING_GUIDELINES.md`
+     - Quick example of custom theme
+   - **Development:**
+     - Link to `docs/CONTRIBUTING.md`
+     - Link to Storybook (if hosted)
+   - **License:** MIT (or as specified)
+   - **Links:** GitHub, Storybook, NPM (if published)
+
+2. **docs/COMPONENTS.md** – API Reference
+
+   - **Structure:** One section per component category
+   - **For each component:**
+     - Component name and description
+     - Import statement
+     - Props table with:
+       - Prop name
+       - Type
+       - Default
+       - Required?
+       - Description
+     - Usage examples (code blocks)
+     - Related components
+   - **Sections:**
+     - Buttons (`KButton`)
+     - Inputs (`KTextInput`, `KNumericInput`, `KMaskedInput`)
+     - Selects (`KSelect`, `KMultiSelect`)
+     - Form Controls (`KCheckbox`, `KRadio`, `KRadioGroup` – if implemented)
+     - Date & Time (`KDatePicker` – if implemented)
+     - Modals (`KModal`)
+     - Layout (`KStack`)
+     - Theme (`KThemeProvider`, `useTheme`)
+     - Other components (as added)
+
+3. **docs/CONTRIBUTING.md** – Contributor Guide
+
+   - **Getting Started:**
+     - Prerequisites (Node, pnpm)
+     - Setup instructions (`pnpm install`)
+     - Running dev commands (`pnpm storybook`, `pnpm test:watch`)
+   - **Development Workflow:**
+     - Branch naming conventions
+     - Commit message guidelines
+     - PR process
+     - Testing requirements
+   - **Code Style:**
+     - ESLint and Prettier usage
+     - TypeScript conventions
+     - Component structure patterns
+   - **Adding New Components:**
+     - Step-by-step guide
+     - Required files (component, types, tests, stories)
+     - Export requirements
+   - **Testing:**
+     - How to write tests
+     - Running tests
+     - Test coverage expectations
+   - **Storybook:**
+     - How to add stories
+     - Story conventions
+   - **CI/CD:**
+     - What runs on PR
+     - How to check CI status
+   - **Questions:** Where to ask (GitHub Issues, etc.)
+
+4. **docs/CHANGELOG.md** – Version History
+
+   - Follow [Keep a Changelog](https://keepachangelog.com/) format
+   - Sections: `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, `Security`
+   - Start with current version (0.1.0)
+   - Document all existing components as "Added" in initial version
+
+5. **LICENSE** file
+
+   - Add MIT License text (matching `package.json` license field)
+   - Or update `package.json` if different license is needed
+
+6. **docs/MIGRATION.md** (optional, for future versions)
+
+   - Template for migration guides between major versions
+   - Can be empty initially but structure it for future use
+
+7. **docs/ACCESSIBILITY.md** (optional but recommended)
+
+   - Document accessibility features
+   - Keyboard navigation patterns
+   - ARIA attribute usage
+   - Screen reader compatibility notes
+   - Testing with assistive technologies
+
+8. **Update existing documentation:**
+
+   - Ensure `docs/PROJECT_SETUP.md` is still accurate
+   - Update `docs/THEMING_GUIDELINES.md` if needed
+   - Cross-reference between docs
+
+9. **Storybook Documentation** (enhancement):
+
+   - Ensure all stories have good descriptions
+   - Add JSDoc comments to components (if not already present)
+   - Configure Storybook to generate docs automatically
+   - Add "Overview" page in Storybook
+
+10. **Code Examples:**
+
+    - Create `examples/` directory (optional)
+    - Add a simple example app showing library usage
+    - Or link to CodeSandbox/StackBlitz examples
+
+**Note:** Documentation should be clear, concise, and example-driven. Prioritize user-facing docs (README, COMPONENTS.md) over contributor docs, but both are important for a healthy open-source project.
+
+---
+
 ## Definition of Done (for the whole project)
 
 - `pnpm install` (or `npm install`) works with no errors.

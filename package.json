@@ -46,9 +46,12 @@
   "license": "MIT",
   "peerDependencies": {
     "@progress/kendo-react-buttons": "latest",
+    "@progress/kendo-react-dateinputs": "latest",
     "@progress/kendo-react-dialogs": "latest",
     "@progress/kendo-react-dropdowns": "latest",
+    "@progress/kendo-react-indicators": "latest",
     "@progress/kendo-react-inputs": "latest",
+    "@progress/kendo-react-layouts": "latest",
     "react": ">=19.0.0",
     "react-dom": ">=19.0.0"
   },

@@ -11,6 +11,11 @@ export { KModal } from './components/Modal';
 export { KStack } from './components/Layout';
 export { KThemeProvider } from './components/Theme';
 export { useTheme } from './components/Theme';
+export { KCheckbox, KRadio, KRadioGroup } from './components/FormControls';
+export { KDatePicker } from './components/DatePicker';
+export { KSpinner } from './components/Feedback';
+export { KBadge, KCard } from './components/DataDisplay';
+export { KTabs } from './components/Navigation';
 
 // Types
 export type {
@@ -48,3 +53,25 @@ export type {
   ThemeContextValue,
 } from './components/Theme';
 export type { KOption } from './types';
+export type {
+  KCheckboxProps,
+} from './components/FormControls';
+export type {
+  KRadioProps,
+} from './components/FormControls';
+export type {
+  KRadioGroupProps,
+} from './components/FormControls';
+export type { KDatePickerProps } from './components/DatePicker';
+export type {
+  KSpinnerProps,
+  KSpinnerSize,
+  KSpinnerThemeColor,
+} from './components/Feedback';
+export type {
+  KBadgeProps,
+  KBadgeVariant,
+  KBadgeSize,
+} from './components/DataDisplay';
+export type { KCardProps } from './components/DataDisplay';
+export type { KTabsProps, KTab } from './components/Navigation';

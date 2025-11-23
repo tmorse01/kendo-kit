@@ -25,9 +25,12 @@ export default defineConfig({
         'react-dom',
         'react/jsx-runtime',
         '@progress/kendo-react-buttons',
-        '@progress/kendo-react-inputs',
-        '@progress/kendo-react-dropdowns',
+        '@progress/kendo-react-dateinputs',
         '@progress/kendo-react-dialogs',
+        '@progress/kendo-react-dropdowns',
+        '@progress/kendo-react-indicators',
+        '@progress/kendo-react-inputs',
+        '@progress/kendo-react-layouts',
       ],
       output: {
         globals: {
