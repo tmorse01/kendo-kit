@@ -7,7 +7,10 @@ import {
 import type { KOption } from '../../types';
 
 export interface KSelectProps
-  extends Omit<DropDownListProps, 'data' | 'value' | 'onChange' | 'textField' | 'dataItemKey'> {
+  extends Omit<
+    DropDownListProps,
+    'data' | 'value' | 'onChange' | 'textField' | 'dataItemKey'
+  > {
   /**
    * Array of options to display
    */
@@ -118,20 +121,24 @@ export const KSelect = React.forwardRef<DropDownListHandle, KSelectProps>(
         value={selectedItem}
         defaultValue={
           defaultValue !== undefined
-            ? options.find((opt) => opt.value === defaultValue) ?? null
+            ? (options.find((opt) => opt.value === defaultValue) ?? null)
             : undefined
         }
         onChange={handleChange}
         textField="label"
         dataItemKey="value"
         disabled={disabled || isLoading}
-        defaultItem={placeholder ? { label: placeholder, value: '' } : undefined}
+        defaultItem={
+          placeholder ? { label: placeholder, value: '' } : undefined
+        }
         className={className}
         style={fullWidth ? { width: '100%' } : undefined}
         aria-label={label}
-        aria-describedby={[hint ? hintId : undefined, error ? errorId : undefined]
-          .filter(Boolean)
-          .join(' ')}
+        aria-describedby={
+          [hint ? hintId : undefined, error ? errorId : undefined]
+            .filter(Boolean)
+            .join(' ') || undefined
+        }
         aria-invalid={error ? 'true' : undefined}
         aria-required={required ? 'true' : undefined}
         aria-busy={isLoading ? 'true' : undefined}
@@ -139,7 +146,10 @@ export const KSelect = React.forwardRef<DropDownListHandle, KSelectProps>(
       />
     );
 
-    if (!label && !hint && !error) {
+    // Always wrap when fullWidth is true or when there's label/hint/error
+    const needsWrapper = fullWidth || label || hint || error;
+
+    if (!needsWrapper) {
       return selectElement;
     }
 
@@ -156,7 +166,12 @@ export const KSelect = React.forwardRef<DropDownListHandle, KSelectProps>(
           >
             {label}
             {required && (
-              <span style={{ color: 'var(--kendo-color-error, #dc3545)', marginLeft: '0.25rem' }}>
+              <span
+                style={{
+                  color: 'var(--kendo-color-error, #dc3545)',
+                  marginLeft: '0.25rem',
+                }}
+              >
                 *
               </span>
             )}
@@ -194,4 +209,3 @@ export const KSelect = React.forwardRef<DropDownListHandle, KSelectProps>(
 );
 
 KSelect.displayName = 'KSelect';
-

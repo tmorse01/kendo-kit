@@ -7,7 +7,10 @@ import {
 import type { KOption } from '../../types';
 
 export interface KMultiSelectProps
-  extends Omit<MultiSelectProps, 'data' | 'value' | 'onChange' | 'textField' | 'dataItemKey'> {
+  extends Omit<
+    MultiSelectProps,
+    'data' | 'value' | 'onChange' | 'textField' | 'dataItemKey'
+  > {
   /**
    * Array of options to display
    */
@@ -70,7 +73,10 @@ export interface KMultiSelectProps
  * />
  * ```
  */
-export const KMultiSelect = React.forwardRef<MultiSelectHandle, KMultiSelectProps>(
+export const KMultiSelect = React.forwardRef<
+  MultiSelectHandle,
+  KMultiSelectProps
+>(
   (
     {
       options,
@@ -130,9 +136,11 @@ export const KMultiSelect = React.forwardRef<MultiSelectHandle, KMultiSelectProp
         className={className}
         style={fullWidth ? { width: '100%' } : undefined}
         aria-label={label}
-        aria-describedby={[hint ? hintId : undefined, error ? errorId : undefined]
-          .filter(Boolean)
-          .join(' ')}
+        aria-describedby={
+          [hint ? hintId : undefined, error ? errorId : undefined]
+            .filter(Boolean)
+            .join(' ') || undefined
+        }
         aria-invalid={error ? 'true' : undefined}
         aria-required={required ? 'true' : undefined}
         aria-busy={isLoading ? 'true' : undefined}
@@ -140,7 +148,10 @@ export const KMultiSelect = React.forwardRef<MultiSelectHandle, KMultiSelectProp
       />
     );
 
-    if (!label && !hint && !error) {
+    // Always wrap when fullWidth is true or when there's label/hint/error
+    const needsWrapper = fullWidth || label || hint || error;
+
+    if (!needsWrapper) {
       return selectElement;
     }
 
@@ -157,7 +168,12 @@ export const KMultiSelect = React.forwardRef<MultiSelectHandle, KMultiSelectProp
           >
             {label}
             {required && (
-              <span style={{ color: 'var(--kendo-color-error, #dc3545)', marginLeft: '0.25rem' }}>
+              <span
+                style={{
+                  color: 'var(--kendo-color-error, #dc3545)',
+                  marginLeft: '0.25rem',
+                }}
+              >
                 *
               </span>
             )}
@@ -195,4 +211,3 @@ export const KMultiSelect = React.forwardRef<MultiSelectHandle, KMultiSelectProp
 );
 
 KMultiSelect.displayName = 'KMultiSelect';
-

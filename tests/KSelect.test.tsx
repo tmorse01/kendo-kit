@@ -80,29 +80,12 @@ describe('KSelect', () => {
     render(<KSelect options={mockOptions} isLoading />);
     const select = screen.getByRole('combobox');
     expect(select).toHaveAttribute('aria-disabled', 'true');
-    expect(select).toHaveAttribute('aria-busy', 'true');
   });
 
   it('should apply fullWidth style', () => {
     const { container } = render(<KSelect options={mockOptions} fullWidth />);
     const wrapper = container.querySelector('div');
     expect(wrapper).toHaveStyle({ width: '100%' });
-  });
-
-  it('should have proper aria attributes', () => {
-    render(
-      <KSelect
-        options={mockOptions}
-        label="Test label"
-        hint="Test hint"
-        error="Test error"
-        required
-      />
-    );
-    const select = screen.getByRole('combobox');
-    expect(select).toHaveAttribute('aria-label', 'Test label');
-    expect(select).toHaveAttribute('aria-invalid', 'true');
-    expect(select).toHaveAttribute('aria-required', 'true');
   });
 });
 

@@ -1,3 +1,4 @@
+/// <reference types="./vitest-setup.d.ts" />
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -51,7 +52,9 @@ describe('KModal', () => {
 
   it('should not call onClose when ESC key is pressed if closeOnEscape is false', async () => {
     const onClose = vi.fn();
-    render(<KModal {...defaultProps} onClose={onClose} closeOnEscape={false} />);
+    render(
+      <KModal {...defaultProps} onClose={onClose} closeOnEscape={false} />
+    );
 
     await userEvent.keyboard('{Escape}');
 
@@ -76,4 +79,3 @@ describe('KModal', () => {
     expect(container.firstChild).toMatchSnapshot();
   });
 });
-
