@@ -31,7 +31,8 @@
     "format:check": "prettier --check \"**/*.{ts,tsx,json,md}\"",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "ci:test": "pnpm lint && pnpm test && pnpm build"
+    "ci:test": "pnpm lint && pnpm test && pnpm build",
+    "prepare": "husky"
   },
   "keywords": [
     "react",
