@@ -67,9 +67,7 @@ export function KCard(props: KCardProps) {
         border: '1px solid var(--kendo-color-base-200, #e5e5e5)',
         borderRadius: '0.25rem',
         backgroundColor: 'var(--kendo-color-base-0, #fff)',
-        boxShadow: elevated
-          ? '0 2px 8px rgba(0, 0, 0, 0.1)'
-          : 'none',
+        boxShadow: elevated ? '0 2px 8px rgba(0, 0, 0, 0.1)' : 'none',
         display: 'flex',
         flexDirection: 'column',
         ...style,
@@ -81,7 +79,9 @@ export function KCard(props: KCardProps) {
           style={{
             padding: paddingValue,
             paddingBottom: 0,
-            borderBottom: title ? '1px solid var(--kendo-color-base-200, #e5e5e5)' : 'none',
+            borderBottom: title
+              ? '1px solid var(--kendo-color-base-200, #e5e5e5)'
+              : 'none',
             fontWeight: 600,
             fontSize: '1.125rem',
           }}
@@ -103,8 +103,9 @@ export function KCard(props: KCardProps) {
           className="k-card-footer"
           style={{
             padding: paddingValue,
-            paddingTop: 0,
-            borderTop: footer ? '1px solid var(--kendo-color-base-200, #e5e5e5)' : 'none',
+            borderTop: footer
+              ? '1px solid var(--kendo-color-base-200, #e5e5e5)'
+              : 'none',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'flex-end',
@@ -117,4 +118,3 @@ export function KCard(props: KCardProps) {
     </div>
   );
 }
-
