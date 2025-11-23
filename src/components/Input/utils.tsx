@@ -12,7 +12,6 @@ export function InputWrapper({
   fullWidth,
   id,
   children,
-  className,
 }: BaseInputProps & { children: ReactElement }) {
   const inputId = id || `input-${Math.random().toString(36).slice(2, 11)}`;
   const hintId = hint ? `${inputId}-hint` : undefined;

@@ -41,7 +41,7 @@ describe('KTextInput', () => {
 
   it('should handle controlled value updates', async () => {
     const handleChange = vi.fn();
-    const { rerender } = render(
+    render(
       <KTextInput label="Email" value="" onChange={handleChange} />
     );
 

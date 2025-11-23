@@ -32,7 +32,7 @@ export interface TextInputProps extends BaseInputProps {
   /** Controlled value */
   value?: string;
   /** Change handler - receives Kendo TextBoxChangeEvent */
-  onChange?: (event: any) => void;
+  onChange?: (event: { value?: string | null }) => void;
   /** Standard HTML input type */
   type?: 'text' | 'email' | 'password' | 'tel' | 'url';
 }
@@ -59,7 +59,7 @@ export interface NumericInputProps extends BaseInputProps {
   /** Controlled numeric value */
   value?: number | null;
   /** Change handler - receives Kendo NumericTextBoxChangeEvent */
-  onChange?: (event: any) => void;
+  onChange?: (event: { value?: number | null }) => void;
   /** Minimum value */
   min?: number;
   /** Maximum value */
@@ -102,7 +102,7 @@ export interface MaskedInputProps extends BaseInputProps {
   /** Controlled value */
   value?: string;
   /** Change handler - receives Kendo MaskedTextBoxChangeEvent */
-  onChange?: (event: any) => void;
+  onChange?: (event: { value?: string | null }) => void;
   /** Mask pattern (e.g., "000-000-0000" for phone) */
   mask: string;
   /** Whether to include literal characters in the value */

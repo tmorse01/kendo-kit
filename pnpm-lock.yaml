@@ -17,8 +17,14 @@ dependencies:
   '@progress/kendo-react-inputs':
     specifier: latest
     version: 13.1.0(@progress/kendo-drawing@1.23.1)(@progress/kendo-inputs-common@3.1.2)(@progress/kendo-licensing@1.7.2)(@progress/kendo-react-animation@13.1.0)(@progress/kendo-react-buttons@13.1.0)(@progress/kendo-react-common@13.1.0)(@progress/kendo-react-dialogs@13.1.0)(@progress/kendo-react-intl@13.1.0)(@progress/kendo-react-labels@13.1.0)(@progress/kendo-react-layout@13.1.0)(@progress/kendo-react-popup@13.1.0)(@progress/kendo-svg-icons@4.5.0)(react-dom@19.2.0)(react@19.2.0)
+  '@progress/kendo-theme-material':
+    specifier: ^12.2.3
+    version: 12.2.3
 
 devDependencies:
+  '@progress/kendo-theme-default':
+    specifier: ^12.2.3
+    version: 12.2.3
   '@storybook/addon-essentials':
     specifier: ^8.0.0
     version: 8.6.14(@types/react@19.2.6)(storybook@8.6.14)
@@ -1314,7 +1320,30 @@ packages:
 
   /@progress/kendo-svg-icons@4.5.0:
     resolution: {integrity: sha512-KO7KZNrm1Fi8jR4HLvaPmwzzsvswAZUlm6jQ0jHz9ck/iuREo8YWIUaVQxnzcmtCT3nRyrYMofLa13eR4PEhQg==}
+
+  /@progress/kendo-theme-core@12.2.3:
+    resolution: {integrity: sha512-eXWSizvlJEwEQW4mls97Hm1K3r0dmTHsDZWsSCZb3obDHxgOxBhio4zrGvJSu+lMOeJQowReK+kdKDXiXb9cqA==}
+
+  /@progress/kendo-theme-default@12.2.3:
+    resolution: {integrity: sha512-AZGJzCTKV+6UxRE2OGnIl78J6ccH7lnVmlhEX2lr262eJYNJmJGQAbS1mpyKiteieXtHMbiRm2B+i7x3jPc0Tw==}
+    dependencies:
+      '@progress/kendo-svg-icons': 4.5.0
+      '@progress/kendo-theme-core': 12.2.3
+      '@progress/kendo-theme-utils': 12.2.3
+    dev: true
+
+  /@progress/kendo-theme-material@12.2.3:
+    resolution: {integrity: sha512-0xzTK8h01EVvLdVfcQXbeHM+97J2Ir5lzq9wGSOQ2gRM1eAcWb23kYqOZ4AHGFc6drmcMfArihHMF+uVLCBDdw==}
+    dependencies:
+      '@progress/kendo-svg-icons': 4.5.0
+      '@progress/kendo-theme-core': 12.2.3
+      '@progress/kendo-theme-utils': 12.2.3
     dev: false
+
+  /@progress/kendo-theme-utils@12.2.3:
+    resolution: {integrity: sha512-yRKrPnqP0w9wKUMxErSkO96yAI6dxhlIlritSZcDJWfaLe8P0906pVXNgs9rL60ba/7/XZbTW9CaFOPT+Wim5A==}
+    dependencies:
+      '@progress/kendo-theme-core': 12.2.3
 
   /@progress/kendo-webspeech-common@1.0.1:
     resolution: {integrity: sha512-c5IHS5vakAtxbaVfd26rM1dZnt9JfUOqWFq7gK8mU3HaZ9rqoH+DEIn72bbiRs+Ju5e81d7H1Q/nMx8u09pwRg==}

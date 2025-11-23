@@ -1,5 +1,6 @@
 import type { Preview } from '@storybook/react';
 import React from 'react';
+import '@progress/kendo-theme-material/dist/all.css';
 
 const preview: Preview = {
   parameters: {
@@ -25,6 +26,12 @@ const preview: Preview = {
             }
           `}
         </style>
+        {/* 
+          Note: If you encounter "Cannot read properties of undefined (reading 'fillMode')" errors,
+          you may need to wrap stories in a Kendo ThemeProvider from @progress/kendo-react-common.
+          Install it with: pnpm add -D @progress/kendo-react-common
+          Then wrap Story with: <ThemeProvider theme="material"><Story /></ThemeProvider>
+        */}
         <Story />
       </>
     ),
@@ -32,4 +39,3 @@ const preview: Preview = {
 };
 
 export default preview;
-

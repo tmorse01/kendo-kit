@@ -4,6 +4,6 @@
 export type KOption = {
   label: string;
   value: string | number;
-  [key: string]: any;
+  [key: string]: unknown;
 };
 
