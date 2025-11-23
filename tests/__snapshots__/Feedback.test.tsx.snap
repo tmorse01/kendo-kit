@@ -1,0 +1,18 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`KSpinner > should render snapshot 1`] = `
+<div
+  class="k-loader k-loader-md k-loader-primary k-loader-pulsing-2"
+>
+  <div
+    class="k-loader-canvas"
+  >
+    <span
+      class="k-loader-segment"
+    />
+    <span
+      class="k-loader-segment"
+    />
+  </div>
+</div>
+`;

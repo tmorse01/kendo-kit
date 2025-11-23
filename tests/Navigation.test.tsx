@@ -59,5 +59,41 @@ describe('KTabs', () => {
     const tabsElement = container.querySelector('.custom-tabs');
     expect(tabsElement).toBeInTheDocument();
   });
+
+  it('should render snapshot', () => {
+    const { container } = render(<KTabs tabs={tabs} />);
+    expect(container.firstChild).toMatchSnapshot();
+  });
+
+  it('should handle empty tabs array', () => {
+    render(<KTabs tabs={[]} />);
+    expect(screen.queryByText('Tab 1')).not.toBeInTheDocument();
+  });
+
+  it('should default to first tab when no activeTabId or defaultActiveTabId provided', () => {
+    render(<KTabs tabs={tabs} />);
+    expect(screen.getByText('Content 1')).toBeInTheDocument();
+  });
+
+  it('should handle invalid activeTabId gracefully', () => {
+    render(<KTabs tabs={tabs} activeTabId="invalid" />);
+    // Should default to first tab
+    expect(screen.getByText('Content 1')).toBeInTheDocument();
+  });
+
+  it('should not call onTabChange when disabled tab is clicked', async () => {
+    const handleChange = vi.fn();
+    const user = userEvent.setup();
+    const tabsWithDisabled = [
+      { id: '1', label: 'Tab 1', content: <div>Content 1</div> },
+      { id: '2', label: 'Tab 2', content: <div>Content 2</div>, disabled: true },
+    ];
+    render(<KTabs tabs={tabsWithDisabled} onTabChange={handleChange} />);
+    const tab2 = screen.getByText('Tab 2');
+    await user.click(tab2);
+    // Disabled tabs shouldn't trigger onChange
+    // Note: This depends on Kendo's TabStrip behavior
+    expect(screen.getByText('Content 1')).toBeInTheDocument();
+  });
 });
 

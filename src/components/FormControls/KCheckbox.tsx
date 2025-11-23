@@ -97,7 +97,7 @@ export function KCheckbox(props: KCheckboxProps) {
       defaultChecked={defaultChecked}
       onChange={onChange}
       disabled={disabled}
-      indeterminate={indeterminate}
+      {...(indeterminate !== undefined && { indeterminate })}
       className={className}
       aria-invalid={error ? 'true' : undefined}
       aria-describedby={ariaDescribedBy}

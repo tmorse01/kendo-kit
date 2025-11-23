@@ -1,5 +1,9 @@
 import React from 'react';
-import { TabStrip, TabStripProps, TabStripTab } from '@progress/kendo-react-layouts';
+import {
+  TabStrip,
+  TabStripProps,
+  TabStripTab,
+} from '@progress/kendo-react-layout';
 
 export interface KTab {
   /**
@@ -20,7 +24,8 @@ export interface KTab {
   disabled?: boolean;
 }
 
-export interface KTabsProps extends Omit<TabStripProps, 'selected' | 'onSelect'> {
+export interface KTabsProps
+  extends Omit<TabStripProps, 'selected' | 'onSelect'> {
   /**
    * Array of tab definitions
    */
@@ -96,15 +101,10 @@ export function KTabs(props: KTabsProps) {
       {...restProps}
     >
       {tabs.map((tab) => (
-        <TabStripTab
-          key={tab.id}
-          title={tab.label}
-          disabled={tab.disabled}
-        >
+        <TabStripTab key={tab.id} title={tab.label} disabled={tab.disabled}>
           {tab.content}
         </TabStripTab>
       ))}
     </TabStrip>
   );
 }
-

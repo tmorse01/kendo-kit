@@ -62,5 +62,36 @@ describe('KDatePicker', () => {
     const input = screen.getByLabelText(/Date/i);
     expect(input).toHaveAttribute('id', 'test-date');
   });
+
+  it('should render snapshot', () => {
+    const { container } = render(<KDatePicker label="Birth Date" />);
+    expect(container.firstChild).toMatchSnapshot();
+  });
+
+  it('should have correct aria attributes when error is present', () => {
+    render(<KDatePicker label="Date" error="Invalid date" />);
+    const input = screen.getByLabelText(/Date/i);
+    expect(input).toHaveAttribute('aria-invalid', 'true');
+  });
+
+  it('should support min and max date constraints', () => {
+    const minDate = new Date(2020, 0, 1);
+    const maxDate = new Date(2030, 11, 31);
+    render(<KDatePicker label="Date" min={minDate} max={maxDate} />);
+    const input = screen.getByLabelText(/Date/i);
+    expect(input).toBeInTheDocument();
+  });
+
+  it('should support custom format', () => {
+    render(<KDatePicker label="Date" format="dd/MM/yyyy" />);
+    const input = screen.getByLabelText(/Date/i);
+    expect(input).toBeInTheDocument();
+  });
+
+  it('should handle null value', () => {
+    render(<KDatePicker label="Date" value={null} onChange={vi.fn()} />);
+    const input = screen.getByLabelText(/Date/i);
+    expect(input).toBeInTheDocument();
+  });
 });
 

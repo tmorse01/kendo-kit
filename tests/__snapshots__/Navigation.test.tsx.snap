@@ -1,0 +1,86 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`KTabs > should render snapshot 1`] = `
+<div
+  class="k-tabstrip k-pos-relative k-tabstrip-md k-tabstrip-top"
+  id="_r_7_"
+>
+  <div
+    class="k-tabstrip-items-wrapper k-tabstrip-items-wrapper-scroll k-hstack"
+  >
+    <ul
+      class="k-tabstrip-items k-tabstrip-items-scroll k-reset k-tabstrip-items-start"
+      role="tablist"
+    >
+      <li
+        aria-controls="_r_7_-content-panel-id"
+        aria-selected="true"
+        class="k-tabstrip-item k-active k-first"
+        id="_r_7_-nav-item-id-0"
+        role="tab"
+        tabindex="0"
+      >
+        <span
+          class="k-link"
+        >
+          Tab 1
+        </span>
+      </li>
+      <li
+        aria-controls="_r_7_-content-panel-id"
+        aria-selected="false"
+        class="k-tabstrip-item"
+        id="_r_7_-nav-item-id-1"
+        role="tab"
+        tabindex="-1"
+      >
+        <span
+          class="k-link"
+        >
+          Tab 2
+        </span>
+      </li>
+      <li
+        aria-controls="_r_7_-content-panel-id"
+        aria-selected="false"
+        class="k-tabstrip-item k-last"
+        id="_r_7_-nav-item-id-2"
+        role="tab"
+        tabindex="-1"
+      >
+        <span
+          class="k-link"
+        >
+          Tab 3
+        </span>
+      </li>
+    </ul>
+  </div>
+  <div
+    aria-hidden="false"
+    aria-labelledby="_r_7_-nav-item-id-0"
+    class="k-tabstrip-content k-active"
+    id="_r_7_-content-panel-id"
+    role="tabpanel"
+    tabindex="0"
+  >
+    <div
+      class="k-animation-container k-animation-container-relative"
+      style="position: initial;"
+    >
+      <div
+        class="k-child-animation-container k-fade-appear k-fade-appear-active"
+        style="transition-delay: 0ms; transition-duration: 500ms;"
+      >
+        <div
+          id="_r_7_-content-panel-id0"
+        >
+          <div>
+            Content 1
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

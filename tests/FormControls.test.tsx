@@ -72,6 +72,29 @@ describe('KCheckbox', () => {
     const wrapper = container.querySelector('.k-checkbox-wrapper-fullwidth');
     expect(wrapper).toBeInTheDocument();
   });
+
+  it('should render snapshot', () => {
+    const { container } = render(<KCheckbox label="I agree" />);
+    expect(container.firstChild).toMatchSnapshot();
+  });
+
+  it('should have correct aria attributes when error is present', () => {
+    render(<KCheckbox label="Agree" error="Error message" />);
+    const checkbox = screen.getByLabelText(/Agree/i);
+    expect(checkbox).toHaveAttribute('aria-invalid', 'true');
+  });
+
+  it('should support indeterminate state', () => {
+    render(<KCheckbox label="Select all" indeterminate />);
+    const checkbox = screen.getByLabelText(/Select all/i);
+    expect(checkbox).toBeInTheDocument();
+  });
+
+  it('should have correct id association between label and checkbox', () => {
+    render(<KCheckbox id="test-checkbox" label="Agree" />);
+    const checkbox = screen.getByLabelText(/Agree/i);
+    expect(checkbox).toHaveAttribute('id', 'test-checkbox');
+  });
 });
 
 describe('KRadio', () => {
@@ -131,6 +154,17 @@ describe('KRadio', () => {
     const { container } = render(<KRadio label="Option 1" value="1" name="group1" fullWidth />);
     const wrapper = container.querySelector('.k-radio-wrapper-fullwidth');
     expect(wrapper).toBeInTheDocument();
+  });
+
+  it('should render snapshot', () => {
+    const { container } = render(<KRadio label="Option 1" value="1" name="group1" />);
+    expect(container.firstChild).toMatchSnapshot();
+  });
+
+  it('should have correct value attribute', () => {
+    render(<KRadio label="Option 1" value="test-value" name="group1" />);
+    const radio = screen.getByLabelText(/Option 1/i);
+    expect(radio).toHaveAttribute('value', 'test-value');
   });
 });
 
@@ -223,6 +257,31 @@ describe('KRadioGroup', () => {
     const { container } = render(<KRadioGroup name="group1" options={options} fullWidth />);
     const wrapper = container.querySelector('.k-radio-group-wrapper-fullwidth');
     expect(wrapper).toBeInTheDocument();
+  });
+
+  it('should render snapshot', () => {
+    const { container } = render(<KRadioGroup name="group1" options={options} />);
+    expect(container.firstChild).toMatchSnapshot();
+  });
+
+  it('should have correct aria attributes', () => {
+    render(<KRadioGroup name="group1" label="Choose" options={options} required error="Error" />);
+    const group = screen.getByRole('radiogroup');
+    expect(group).toHaveAttribute('aria-required', 'true');
+    expect(group).toHaveAttribute('aria-invalid', 'true');
+  });
+
+  it('should support horizontal layout', () => {
+    const { container } = render(
+      <KRadioGroup name="group1" options={options} direction="row" gap="2rem" />
+    );
+    const wrapper = container.querySelector('.k-radio-group-wrapper');
+    expect(wrapper).toBeInTheDocument();
+  });
+
+  it('should handle empty options array', () => {
+    render(<KRadioGroup name="group1" options={[]} />);
+    expect(screen.queryByRole('radio')).not.toBeInTheDocument();
   });
 });
 

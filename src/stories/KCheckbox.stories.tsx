@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
 import { KCheckbox } from '../components/FormControls';
 
 const meta: Meta<typeof KCheckbox> = {
@@ -98,3 +99,29 @@ export const FullWidth: Story = {
   },
 };
 
+export const Interactive: Story = {
+  render: () => {
+    const [checked, setChecked] = useState(false);
+    return (
+      <KCheckbox
+        label="Click me to toggle"
+        checked={checked}
+        onChange={(e) => setChecked(e.value)}
+      />
+    );
+  },
+};
+
+export const AllStates: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <KCheckbox label="Unchecked" />
+      <KCheckbox label="Checked" checked />
+      <KCheckbox label="Indeterminate" indeterminate />
+      <KCheckbox label="Disabled" disabled />
+      <KCheckbox label="Disabled Checked" disabled checked />
+      <KCheckbox label="With Error" error="This field is required" />
+      <KCheckbox label="With Hint" hint="This is a helpful hint" />
+    </div>
+  ),
+};

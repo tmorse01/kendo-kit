@@ -1,5 +1,5 @@
 import React from 'react';
-import { RadioButton, RadioButtonProps } from '@progress/kendo-react-buttons';
+import { RadioButton, RadioButtonProps } from '@progress/kendo-react-inputs';
 
 export interface KRadioProps extends Omit<RadioButtonProps, 'checked' | 'onChange'> {
   /**

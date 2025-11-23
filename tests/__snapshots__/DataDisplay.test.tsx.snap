@@ -1,0 +1,24 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`KBadge > should render snapshot 1`] = `
+<span
+  class="k-badge k-badge-primary k-badge-md "
+  style="display: inline-flex; align-items: center; justify-content: center; border-radius: 0.25rem; font-weight: 600; line-height: 1; font-size: 0.875rem; padding: 0.25rem 0.5rem; min-width: 1.5rem; height: 1.5rem; background-color: var(--kendo-color-primary, #0078d4); color: white;"
+>
+  Badge
+</span>
+`;
+
+exports[`KCard > should render snapshot 1`] = `
+<div
+  class="k-card  "
+  style="border: 1px solid var(--kendo-color-base-200, #e5e5e5); border-radius: 0.25rem; background-color: var(--kendo-color-base-0, #fff); box-shadow: none; display: flex; flex-direction: column;"
+>
+  <div
+    class="k-card-body"
+    style="padding: 1rem; flex: 1 1 0%;"
+  >
+    Card content
+  </div>
+</div>
+`;

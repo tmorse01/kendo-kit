@@ -26,5 +26,36 @@ describe('KSpinner', () => {
     const spinner = container.querySelector('.custom-spinner');
     expect(spinner).toBeInTheDocument();
   });
+
+  it('should render snapshot', () => {
+    const { container } = render(<KSpinner />);
+    expect(container.firstChild).toMatchSnapshot();
+  });
+
+  it('should render with different sizes', () => {
+    const { container: sm } = render(<KSpinner size="sm" />);
+    expect(sm.querySelector('.k-loader')).toBeInTheDocument();
+
+    const { container: md } = render(<KSpinner size="md" />);
+    expect(md.querySelector('.k-loader')).toBeInTheDocument();
+
+    const { container: lg } = render(<KSpinner size="lg" />);
+    expect(lg.querySelector('.k-loader')).toBeInTheDocument();
+  });
+
+  it('should render with different theme colors', () => {
+    const { container: primary } = render(<KSpinner themeColor="primary" />);
+    expect(primary.querySelector('.k-loader')).toBeInTheDocument();
+
+    const { container: secondary } = render(<KSpinner themeColor="secondary" />);
+    expect(secondary.querySelector('.k-loader')).toBeInTheDocument();
+  });
+
+  it('should render overlay with correct styles', () => {
+    const { container } = render(<KSpinner overlay />);
+    const overlay = container.querySelector('div[style*="position: fixed"]');
+    expect(overlay).toBeInTheDocument();
+    expect(overlay).toHaveStyle({ zIndex: '9999' });
+  });
 });
 

@@ -1,0 +1,155 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`KCheckbox > should render snapshot 1`] = `
+<div
+  class="k-checkbox-wrapper"
+>
+  <div
+    style="display: flex; align-items: flex-start; gap: 0.5rem;"
+  >
+    <div>
+      <span
+        class="k-checkbox-wrap"
+      >
+        <input
+          class="k-checkbox k-checkbox-md k-rounded-md"
+          id="checkbox-100000000"
+          role="checkbox"
+          tabindex="0"
+          type="checkbox"
+        />
+      </span>
+    </div>
+    <label
+      class="k-label"
+      for="checkbox-100000000"
+      style="cursor: pointer;"
+    >
+      I agree
+    </label>
+  </div>
+</div>
+`;
+
+exports[`KRadio > should render snapshot 1`] = `
+<div
+  class="k-radio-wrapper"
+>
+  <div
+    style="display: flex; align-items: flex-start; gap: 0.5rem;"
+  >
+    <span
+      class="k-radio-wrap"
+    >
+      <input
+        class="k-radio k-radio-md"
+        id="radio-group1-1-100000000"
+        name="group1"
+        tabindex="0"
+        type="radio"
+        value="1"
+      />
+    </span>
+    <label
+      class="k-label"
+      for="radio-group1-1-100000000"
+      style="cursor: pointer;"
+    >
+      Option 1
+    </label>
+  </div>
+</div>
+`;
+
+exports[`KRadioGroup > should render snapshot 1`] = `
+<div
+  class="k-radio-group-wrapper"
+  role="radiogroup"
+>
+  <div
+    style="display: flex; flex-direction: column; gap: 0.5rem;"
+  >
+    <div
+      class="k-radio-wrapper"
+    >
+      <div
+        style="display: flex; align-items: flex-start; gap: 0.5rem;"
+      >
+        <span
+          class="k-radio-wrap"
+        >
+          <input
+            class="k-radio k-radio-md"
+            id="radio-group1-1-100000002"
+            name="group1"
+            tabindex="0"
+            type="radio"
+            value="1"
+          />
+        </span>
+        <label
+          class="k-label"
+          for="radio-group1-1-100000002"
+          style="cursor: pointer;"
+        >
+          Option 1
+        </label>
+      </div>
+    </div>
+    <div
+      class="k-radio-wrapper"
+    >
+      <div
+        style="display: flex; align-items: flex-start; gap: 0.5rem;"
+      >
+        <span
+          class="k-radio-wrap"
+        >
+          <input
+            class="k-radio k-radio-md"
+            id="radio-group1-2-10000000z"
+            name="group1"
+            tabindex="0"
+            type="radio"
+            value="2"
+          />
+        </span>
+        <label
+          class="k-label"
+          for="radio-group1-2-10000000z"
+          style="cursor: pointer;"
+        >
+          Option 2
+        </label>
+      </div>
+    </div>
+    <div
+      class="k-radio-wrapper"
+    >
+      <div
+        style="display: flex; align-items: flex-start; gap: 0.5rem;"
+      >
+        <span
+          class="k-radio-wrap"
+        >
+          <input
+            class="k-radio k-radio-md"
+            id="radio-group1-3-10000001w"
+            name="group1"
+            tabindex="0"
+            type="radio"
+            value="3"
+          />
+        </span>
+        <label
+          class="k-label"
+          for="radio-group1-3-10000001w"
+          style="cursor: pointer;"
+        >
+          Option 3
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+`;

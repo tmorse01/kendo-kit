@@ -63,7 +63,11 @@ export const Controlled: Story = {
   render: () => {
     const [activeTab, setActiveTab] = useState('1');
     return (
-      <KTabs tabs={tabs} activeTabId={activeTab} onTabChange={(id) => setActiveTab(id)} />
+      <KTabs
+        tabs={tabs}
+        activeTabId={activeTab}
+        onTabChange={(id) => setActiveTab(id)}
+      />
     );
   },
 };
@@ -104,3 +108,20 @@ export const ManyTabs: Story = {
   },
 };
 
+export const InteractiveExample: Story = {
+  render: () => {
+    const [activeTab, setActiveTab] = useState('1');
+    return (
+      <div>
+        <p style={{ marginBottom: '1rem' }}>
+          Current active tab: <strong>{activeTab}</strong>
+        </p>
+        <KTabs
+          tabs={tabs}
+          activeTabId={activeTab}
+          onTabChange={(id) => setActiveTab(id)}
+        />
+      </div>
+    );
+  },
+};

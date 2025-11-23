@@ -119,3 +119,30 @@ export const ComplexContent: Story = {
   },
 };
 
+export const AllVariations: Story = {
+  render: () => (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '2rem',
+        width: '400px',
+      }}
+    >
+      <KCard>Simple card with just content</KCard>
+      <KCard title="Card with Title">Card content goes here</KCard>
+      <KCard footer={<KButton size="sm">Action</KButton>}>
+        Card with footer
+      </KCard>
+      <KCard title="Complete Card" footer={<KButton size="sm">Save</KButton>}>
+        Card with both title and footer
+      </KCard>
+      <KCard elevated title="Elevated Card">
+        This card has a shadow
+      </KCard>
+      <KCard padding="2rem" title="Custom Padding">
+        This card has custom padding
+      </KCard>
+    </div>
+  ),
+};

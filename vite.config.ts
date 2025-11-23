@@ -30,7 +30,7 @@ export default defineConfig({
         '@progress/kendo-react-dropdowns',
         '@progress/kendo-react-indicators',
         '@progress/kendo-react-inputs',
-        '@progress/kendo-react-layouts',
+        '@progress/kendo-react-layout',
       ],
       output: {
         globals: {
@@ -44,4 +44,3 @@ export default defineConfig({
     emptyOutDir: true,
   },
 });
-

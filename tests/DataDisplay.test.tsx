@@ -76,5 +76,65 @@ describe('KCard', () => {
     const card = container.querySelector('.custom-card');
     expect(card).toBeInTheDocument();
   });
+
+  it('should render snapshot', () => {
+    const { container } = render(<KCard>Card content</KCard>);
+    expect(container.firstChild).toMatchSnapshot();
+  });
+
+  it('should apply custom padding', () => {
+    const { container } = render(<KCard padding="2rem">Content</KCard>);
+    const body = container.querySelector('.k-card-body');
+    expect(body).toHaveStyle({ padding: '2rem' });
+  });
+
+  it('should render with only title', () => {
+    render(<KCard title="Title only">Content</KCard>);
+    expect(screen.getByText('Title only')).toBeInTheDocument();
+    expect(screen.getByText('Content')).toBeInTheDocument();
+  });
+
+  it('should render with only footer', () => {
+    render(<KCard footer={<button>Footer</button>}>Content</KCard>);
+    expect(screen.getByRole('button', { name: /Footer/i })).toBeInTheDocument();
+    expect(screen.getByText('Content')).toBeInTheDocument();
+  });
+});
+
+describe('KBadge', () => {
+  it('should render snapshot', () => {
+    const { container } = render(<KBadge>Badge</KBadge>);
+    expect(container.firstChild).toMatchSnapshot();
+  });
+
+  it('should apply custom style', () => {
+    const { container } = render(
+      <KBadge style={{ marginTop: '10px' }}>Badge</KBadge>
+    );
+    const badge = container.querySelector('.k-badge');
+    expect(badge).toHaveStyle({ marginTop: '10px' });
+  });
+
+  it('should render with all variants', () => {
+    const variants: Array<'primary' | 'secondary' | 'success' | 'warning' | 'error'> = [
+      'primary',
+      'secondary',
+      'success',
+      'warning',
+      'error',
+    ];
+    variants.forEach((variant) => {
+      const { container } = render(<KBadge variant={variant}>Badge</KBadge>);
+      expect(container.querySelector(`.k-badge-${variant}`)).toBeInTheDocument();
+    });
+  });
+
+  it('should render with all sizes', () => {
+    const sizes: Array<'sm' | 'md' | 'lg'> = ['sm', 'md', 'lg'];
+    sizes.forEach((size) => {
+      const { container } = render(<KBadge size={size}>Badge</KBadge>);
+      expect(container.querySelector(`.k-badge-${size}`)).toBeInTheDocument();
+    });
+  });
 });
 

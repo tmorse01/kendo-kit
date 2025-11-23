@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom/vitest';
-import { afterEach, vi } from 'vitest';
+import { afterEach, vi, beforeEach } from 'vitest';
 import { cleanup } from '@testing-library/react';
 
 // Import Kendo theme CSS for story tests
@@ -38,7 +38,32 @@ if (typeof window !== 'undefined') {
   document.head.appendChild(style);
 }
 
-// Cleanup after each test
+// Mock Math.random() to generate deterministic IDs for snapshot tests
+// This ensures snapshots remain stable across test runs
+// We use a counter that produces predictable base36 strings when converted
+let randomCounter = 0;
+beforeEach(() => {
+  randomCounter = 0;
+  vi.spyOn(Math, 'random').mockImplementation(() => {
+    randomCounter += 1;
+    // Generate deterministic base36 strings without leading zeros
+    // Start from a large number (36^8) to ensure we get base36 strings without leading zeros
+    // Each call gets a unique but deterministic value
+    // We use 36^8 = 2,821,109,907,456 as base to ensure 9-character base36 strings
+    const baseValue = Math.pow(36, 8); // Ensures 9-character base36 strings without leading zeros
+    const deterministicValue = baseValue + randomCounter;
+    const base36String = deterministicValue.toString(36);
+    // Convert back to a decimal between 0 and 1
+    // When Math.random().toString(36) is called, JavaScript converts decimal to base36
+    // To produce a specific base36 string, we need: parseInt(base36String, 36) / 36^9
+    const numericValue = parseInt(base36String, 36);
+    const desiredLength = 9;
+    const divisor = Math.pow(36, desiredLength);
+    return numericValue / divisor;
+  });
+});
+
 afterEach(() => {
   cleanup();
+  vi.restoreAllMocks();
 });

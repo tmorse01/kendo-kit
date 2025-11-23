@@ -61,7 +61,9 @@ export const Colors: Story = {
       </div>
       <div>
         <KSpinner themeColor="secondary" />
-        <div style={{ marginTop: '0.5rem', textAlign: 'center' }}>Secondary</div>
+        <div style={{ marginTop: '0.5rem', textAlign: 'center' }}>
+          Secondary
+        </div>
       </div>
       <div>
         <KSpinner themeColor="base" />
@@ -80,3 +82,32 @@ export const WithOverlay: Story = {
   },
 };
 
+export const AllVariations: Story = {
+  render: () => (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '2rem',
+        alignItems: 'center',
+      }}
+    >
+      <div>
+        <h3 style={{ marginBottom: '1rem' }}>Sizes</h3>
+        <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
+          <KSpinner size="sm" />
+          <KSpinner size="md" />
+          <KSpinner size="lg" />
+        </div>
+      </div>
+      <div>
+        <h3 style={{ marginBottom: '1rem' }}>Colors</h3>
+        <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
+          <KSpinner themeColor="primary" />
+          <KSpinner themeColor="secondary" />
+          <KSpinner themeColor="base" />
+        </div>
+      </div>
+    </div>
+  ),
+};

@@ -109,3 +109,34 @@ export const FullWidth: Story = {
   },
 };
 
+export const Uncontrolled: Story = {
+  args: {
+    label: 'Start Date',
+    defaultValue: new Date(),
+  },
+};
+
+export const AllStates: Story = {
+  render: () => (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1rem',
+        width: '300px',
+      }}
+    >
+      <KDatePicker label="Default" />
+      <KDatePicker label="With Value" value={new Date(2024, 0, 15)} />
+      <KDatePicker label="Required" required />
+      <KDatePicker label="With Error" error="Please select a date" />
+      <KDatePicker label="With Hint" hint="Select a date from the calendar" />
+      <KDatePicker label="Disabled" disabled />
+      <KDatePicker
+        label="With Min/Max"
+        min={new Date(2020, 0, 1)}
+        max={new Date(2030, 11, 31)}
+      />
+    </div>
+  ),
+};
