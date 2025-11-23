@@ -47,13 +47,15 @@ export function KTextInput(props: KTextInputProps) {
   // Determine if controlled or uncontrolled
   const isControlled = 'value' in props && props.value !== undefined;
   const value = isControlled ? props.value : undefined;
-  const defaultValue = !isControlled && 'defaultValue' in props ? props.defaultValue : undefined;
+  const defaultValue =
+    !isControlled && 'defaultValue' in props ? props.defaultValue : undefined;
   const onChange = isControlled ? props.onChange : undefined;
 
   const inputId = id || `text-input-${Math.random().toString(36).slice(2, 11)}`;
   const hintId = hint ? `${inputId}-hint` : undefined;
   const errorId = error ? `${inputId}-error` : undefined;
-  const ariaDescribedBy = [hintId, errorId].filter(Boolean).join(' ') || undefined;
+  const ariaDescribedBy =
+    [hintId, errorId].filter(Boolean).join(' ') || undefined;
 
   return (
     <InputWrapper
@@ -85,4 +87,3 @@ export function KTextInput(props: KTextInputProps) {
     </InputWrapper>
   );
 }
-

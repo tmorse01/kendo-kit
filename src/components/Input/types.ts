@@ -1,3 +1,4 @@
+import type { TextBoxChangeEvent } from '@progress/kendo-react-inputs';
 
 /**
  * Shared props for all input components
@@ -32,7 +33,7 @@ export interface TextInputProps extends BaseInputProps {
   /** Controlled value */
   value?: string;
   /** Change handler - receives Kendo TextBoxChangeEvent */
-  onChange?: (event: { value?: string | null }) => void;
+  onChange?: (event: TextBoxChangeEvent) => void;
   /** Standard HTML input type */
   type?: 'text' | 'email' | 'password' | 'tel' | 'url';
 }
@@ -93,7 +94,9 @@ export interface NumericInputUncontrolledProps extends BaseInputProps {
 /**
  * Combined props for numeric input (supports both controlled and uncontrolled)
  */
-export type KNumericInputProps = NumericInputProps | NumericInputUncontrolledProps;
+export type KNumericInputProps =
+  | NumericInputProps
+  | NumericInputUncontrolledProps;
 
 /**
  * Props for masked input components (controlled)
@@ -125,4 +128,3 @@ export interface MaskedInputUncontrolledProps extends BaseInputProps {
  * Combined props for masked input (supports both controlled and uncontrolled)
  */
 export type KMaskedInputProps = MaskedInputProps | MaskedInputUncontrolledProps;
-
