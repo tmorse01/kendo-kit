@@ -1,24 +1,31 @@
+import React from 'react';
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, cleanup } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { KButton } from '../src/components/Button';
+import { KendoThemeProvider } from './helpers/kendo-theme-provider';
+
+// Helper to render with theme provider
+const renderWithTheme = (ui: React.ReactElement) => {
+  return render(<KendoThemeProvider>{ui}</KendoThemeProvider>);
+};
 
 describe('KButton', () => {
   it('should render with default props', () => {
-    const { container } = render(<KButton>Click me</KButton>);
+    const { container } = renderWithTheme(<KButton>Click me</KButton>);
     expect(screen.getByText('Click me')).toBeInTheDocument();
     expect(container.firstChild).toBeInTheDocument();
   });
 
   it('should render snapshot', () => {
-    const { container } = render(<KButton>Click me</KButton>);
+    const { container } = renderWithTheme(<KButton>Click me</KButton>);
     expect(container.firstChild).toMatchSnapshot();
   });
 
   it('should call onClick handler when clicked', async () => {
     const handleClick = vi.fn();
     const user = userEvent.setup();
-    render(<KButton onClick={handleClick}>Click me</KButton>);
+    renderWithTheme(<KButton onClick={handleClick}>Click me</KButton>);
 
     const button = screen.getByRole('button', { name: /click me/i });
     await user.click(button);
@@ -29,7 +36,7 @@ describe('KButton', () => {
   it('should not call onClick when disabled', async () => {
     const handleClick = vi.fn();
     const user = userEvent.setup();
-    render(
+    renderWithTheme(
       <KButton onClick={handleClick} disabled>
         Click me
       </KButton>
@@ -44,7 +51,7 @@ describe('KButton', () => {
   it('should not call onClick when loading', async () => {
     const handleClick = vi.fn();
     const user = userEvent.setup();
-    render(
+    renderWithTheme(
       <KButton onClick={handleClick} isLoading>
         Click me
       </KButton>
@@ -57,51 +64,62 @@ describe('KButton', () => {
   });
 
   it('should be disabled when isLoading is true', () => {
-    render(<KButton isLoading>Click me</KButton>);
+    renderWithTheme(<KButton isLoading>Click me</KButton>);
     const button = screen.getByRole('button', { name: /click me/i });
     expect(button).toBeDisabled();
   });
 
   it('should have aria-busy when isLoading is true', () => {
-    render(<KButton isLoading>Click me</KButton>);
+    renderWithTheme(<KButton isLoading>Click me</KButton>);
     const button = screen.getByRole('button', { name: /click me/i });
     expect(button).toHaveAttribute('aria-busy', 'true');
   });
 
-  it('should render with different variants', () => {
-    const { unmount } = render(<KButton variant="primary">Primary</KButton>);
+  it('should render with primary variant', () => {
+    renderWithTheme(<KButton variant="primary">Primary</KButton>);
     expect(
       screen.getByRole('button', { name: /primary/i })
     ).toBeInTheDocument();
-    unmount();
+  });
 
-    render(<KButton variant="secondary">Secondary</KButton>);
+  it('should render with secondary variant', () => {
+    renderWithTheme(<KButton variant="secondary">Secondary</KButton>);
     expect(
       screen.getByRole('button', { name: /secondary/i })
     ).toBeInTheDocument();
-    cleanup();
+  });
 
-    render(<KButton variant="ghost">Ghost</KButton>);
+  it('should render with ghost variant', () => {
+    renderWithTheme(<KButton variant="ghost">Ghost</KButton>);
     expect(screen.getByRole('button', { name: /ghost/i })).toBeInTheDocument();
-    cleanup();
+  });
 
-    render(<KButton variant="danger">Danger</KButton>);
+  it('should render with danger variant', () => {
+    renderWithTheme(<KButton variant="danger">Danger</KButton>);
     expect(screen.getByRole('button', { name: /danger/i })).toBeInTheDocument();
   });
 
   it('should render with different sizes', () => {
-    const { rerender } = render(<KButton size="sm">Small</KButton>);
+    const { rerender } = renderWithTheme(<KButton size="sm">Small</KButton>);
     expect(screen.getByRole('button', { name: /small/i })).toBeInTheDocument();
 
-    rerender(<KButton size="md">Medium</KButton>);
+    rerender(
+      <KendoThemeProvider>
+        <KButton size="md">Medium</KButton>
+      </KendoThemeProvider>
+    );
     expect(screen.getByRole('button', { name: /medium/i })).toBeInTheDocument();
 
-    rerender(<KButton size="lg">Large</KButton>);
+    rerender(
+      <KendoThemeProvider>
+        <KButton size="lg">Large</KButton>
+      </KendoThemeProvider>
+    );
     expect(screen.getByRole('button', { name: /large/i })).toBeInTheDocument();
   });
 
   it('should render with iconLeft', () => {
-    render(
+    renderWithTheme(
       <KButton iconLeft={<span data-testid="icon-left">←</span>}>
         With Icon
       </KButton>
@@ -111,7 +129,7 @@ describe('KButton', () => {
   });
 
   it('should render with iconRight', () => {
-    render(
+    renderWithTheme(
       <KButton iconRight={<span data-testid="icon-right">→</span>}>
         With Icon
       </KButton>
@@ -121,7 +139,7 @@ describe('KButton', () => {
   });
 
   it('should render with both iconLeft and iconRight', () => {
-    render(
+    renderWithTheme(
       <KButton
         iconLeft={<span data-testid="icon-left">←</span>}
         iconRight={<span data-testid="icon-right">→</span>}
@@ -135,7 +153,7 @@ describe('KButton', () => {
   });
 
   it('should show loading spinner when isLoading is true', () => {
-    const { container } = render(<KButton isLoading>Loading</KButton>);
+    const { container } = renderWithTheme(<KButton isLoading>Loading</KButton>);
     const spinner = container.querySelector('[aria-hidden="true"]');
     expect(spinner).toBeInTheDocument();
     expect(screen.getByText('Loading')).toBeInTheDocument();

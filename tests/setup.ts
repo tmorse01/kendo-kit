@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom/vitest';
-import { afterEach } from 'vitest';
+import { afterEach, vi } from 'vitest';
 import { cleanup } from '@testing-library/react';
 
 // Import Kendo theme CSS for story tests
@@ -7,6 +7,21 @@ import { cleanup } from '@testing-library/react';
 // Using dynamic import to avoid breaking if theme is not available
 import('@progress/kendo-theme-default/dist/all.css').catch(() => {
   // If theme is not available, continue without it (for regular unit tests)
+});
+
+// Mock Kendo useUnstyled hook to prevent fillMode errors in tests
+// Kendo components require theme context via useUnstyled hook
+vi.mock('@progress/kendo-react-common', async () => {
+  const actual = await vi.importActual('@progress/kendo-react-common');
+  return {
+    ...actual,
+    useUnstyled: () => ({
+      size: 'medium',
+      rounded: 'medium',
+      fillMode: 'solid',
+      themeColor: 'base',
+    }),
+  };
 });
 
 // Mock Kendo theme context to prevent fillMode errors in tests

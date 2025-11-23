@@ -1,5 +1,9 @@
 import React from 'react';
-import { Button, ButtonProps } from '@progress/kendo-react-buttons';
+import {
+  Button,
+  ButtonProps,
+  ButtonHandle,
+} from '@progress/kendo-react-buttons';
 
 export type KButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
 export type KButtonSize = 'sm' | 'md' | 'lg';
@@ -40,7 +44,7 @@ export interface KButtonProps
  * </KButton>
  * ```
  */
-export const KButton = React.forwardRef<HTMLButtonElement, KButtonProps>(
+export const KButton = React.forwardRef<ButtonHandle, KButtonProps>(
   (
     {
       variant = 'primary',
@@ -59,7 +63,7 @@ export const KButton = React.forwardRef<HTMLButtonElement, KButtonProps>(
     const themeColorMap: Record<KButtonVariant, ButtonProps['themeColor']> = {
       primary: 'primary',
       secondary: 'base',
-      ghost: null,
+      ghost: 'base',
       danger: 'error',
     };
 
@@ -88,16 +92,19 @@ export const KButton = React.forwardRef<HTMLButtonElement, KButtonProps>(
         children
       );
 
+    const themeColor = themeColorMap[variant];
+    const buttonProps: ButtonProps = {
+      size: sizeMap[size],
+      fillMode: variant === 'ghost' ? 'flat' : 'solid',
+      themeColor,
+      disabled: disabled || isLoading,
+      className,
+      ...(isLoading && { 'aria-busy': true }),
+      ...restProps,
+    };
+
     return (
-      <Button
-        ref={ref}
-        themeColor={themeColorMap[variant]}
-        size={sizeMap[size]}
-        disabled={disabled || isLoading}
-        className={className}
-        aria-busy={isLoading}
-        {...restProps}
-      >
+      <Button ref={ref} {...buttonProps}>
         {isLoading ? (
           <span
             style={{

@@ -52,7 +52,7 @@
     "react-dom": ">=19.0.0"
   },
   "devDependencies": {
-    "@progress/kendo-react-common": "latest",
+    "@progress/kendo-react-common": "^13.1.0",
     "@progress/kendo-theme-default": "^12.2.3",
     "@storybook/addon-essentials": "^8.0.0",
     "@storybook/addon-interactions": "^8.0.0",
